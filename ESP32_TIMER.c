@@ -85,10 +85,10 @@ esp_err_t ESP32_TIMER_SetInterruptCb(esp32_timer_group_type_t group,
 
 	esp_err_t err;
 
-	err =timer_set_alarm_value(group, timer_num, alarm_value);
-	
 	//ENABLE TIMER ALARM EVENTS
+	//SET ALARM VALUE
 	err = timer_set_alarm(group, timer_num, TIMER_ALARM_EN);
+	err =timer_set_alarm_value(group, timer_num, alarm_value);
 
 	//REGISTER ISR
 	//SET CB FUNCTION VARIABLE
@@ -234,6 +234,11 @@ static void s_timer_group_0_timer_1_isr(void* arg)
 	//CLEAR INTERRUPT
 	TIMERG0.int_clr_timers.t1 = 1;
 
+	//RESET ALARM
+	//ESP32 ALARMS ARE ONE SHOT
+	//NEED TO BE MANUALLY SET EVERY TIME
+	timer_set_alarm(TIMER_GROUP0, TIMER1, TIMER_ALARM_EN);
+
 	//CALL USER CB FUNCTION IF NOT NULL
 	if(s_timer_group_0_timer_1_cb != NULL)
 	{
@@ -248,6 +253,11 @@ static void s_timer_group_1_timer_0_isr(void* arg)
 	//CLEAR INTERRUPT
 	TIMERG1.int_clr_timers.t0 = 1;
 
+	//RESET ALARM
+	//ESP32 ALARMS ARE ONE SHOT
+	//NEED TO BE MANUALLY SET EVERY TIME
+	timer_set_alarm(TIMER_GROUP1, TIMER0, TIMER_ALARM_EN);
+
 	//CALL USER CB FUNCTION IF NOT NULL
 	if(s_timer_group_1_timer_0_cb != NULL)
 	{
@@ -261,6 +271,11 @@ static void s_timer_group_1_timer_1_isr(void* arg)
 
 	//CLEAR INTERRUPT
 	TIMERG1.int_clr_timers.t1 = 1;
+
+	//RESET ALARM
+	//ESP32 ALARMS ARE ONE SHOT
+	//NEED TO BE MANUALLY SET EVERY TIME
+	timer_set_alarm(TIMER_GROUP1, TIMER1, TIMER_ALARM_EN);
 
 	//CALL USER CB FUNCTION IF NOT NULL
 	if(s_timer_group_1_timer_1_cb != NULL)
