@@ -71,7 +71,7 @@ esp_err_t ESP32_TIMER_Initialize(esp32_timer_group_type_t group,
 
 	if(s_debug)
 	{
-		ESP_LOGI(ESP32_TIMER_TAG, "Timer group = %u id = %u Initialize", group, timer_num);
+		ets_printf(ESP32_TIMER_TAG" : Timer group = %u id = %u Initialize\n", group, timer_num);
 	}
 	return ESP_OK;
 }
@@ -149,7 +149,7 @@ esp_err_t ESP32_TIMER_SetInterruptCb(esp32_timer_group_type_t group,
 
 	if(s_debug)
 	{
-		ESP_LOGI(ESP32_TIMER_TAG, "Timer group = %u id = %u ISR registered", group, timer_num);
+		ets_printf(ESP32_TIMER_TAG" : Timer group = %u id = %u ISR registered\n", group, timer_num);
 	}
 	return ESP_OK;
 }
@@ -173,7 +173,7 @@ esp_err_t ESP32_TIMER_Start(esp32_timer_group_type_t group, esp32_timer_timer_ty
 
 	if(s_debug)
 	{
-		ESP_LOGI(ESP32_TIMER_TAG, "Timer group = %u id = %u Started", group, timer_num);
+		ets_printf(ESP32_TIMER_TAG" : Timer group = %u id = %u Started\n", group, timer_num);
 	}
 	return ESP_OK;
 }
@@ -193,7 +193,7 @@ esp_err_t ESP32_TIMER_Stop(esp32_timer_group_type_t group, esp32_timer_timer_typ
 
 	if(s_debug)
 	{
-		ESP_LOGI(ESP32_TIMER_TAG, "Timer group = %u id = %u Stopped", group, timer_num);
+		ets_printf(ESP32_TIMER_TAG" : Timer group = %u id = %u Stopped\n", group, timer_num);
 	}
 	return ESP_OK;
 }
