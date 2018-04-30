@@ -61,7 +61,8 @@ esp_err_t ESP32_TIMER_Initialize(esp32_timer_group_type_t group,
 esp_err_t ESP32_TIMER_SetInterruptCb(esp32_timer_group_type_t group,
                                     esp32_timer_timer_type_t timer_num,
                                     uint64_t alarm_value,
-									void (*cb)(void*));
+                                    void (*cb)(void*),
+                                    void* cb_arg);
 
 esp_err_t ESP32_TIMER_Start(esp32_timer_group_type_t group, 
                             esp32_timer_timer_type_t timer_num);

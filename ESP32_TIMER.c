@@ -79,7 +79,8 @@ esp_err_t ESP32_TIMER_Initialize(esp32_timer_group_type_t group,
 esp_err_t ESP32_TIMER_SetInterruptCb(esp32_timer_group_type_t group,
                                     esp32_timer_timer_type_t timer_num,
                                     uint64_t alarm_value,
-									void (*cb)(void*))
+									void (*cb)(void*),
+									void* cb_arg)
 {
 	//SET TIMER INTERRUPT CB AS SPECIFIED
 
@@ -99,7 +100,7 @@ esp_err_t ESP32_TIMER_SetInterruptCb(esp32_timer_group_type_t group,
 			err = timer_isr_register(group, 
 										timer_num,
 										s_timer_group_0_timer_0_isr,
-										NULL,
+										cb_arg,
 										ESP_INTR_FLAG_LOWMED,
 										NULL);
 			s_timer_group_0_timer_0_cb = cb;
@@ -109,7 +110,7 @@ esp_err_t ESP32_TIMER_SetInterruptCb(esp32_timer_group_type_t group,
 			err = timer_isr_register(group, 
 										timer_num,
 										s_timer_group_0_timer_1_isr,
-										NULL,
+										cb_arg,
 										ESP_INTR_FLAG_LOWMED,
 										NULL);
 			s_timer_group_0_timer_1_cb = cb;
@@ -122,7 +123,7 @@ esp_err_t ESP32_TIMER_SetInterruptCb(esp32_timer_group_type_t group,
 			err = timer_isr_register(group, 
 										timer_num,
 										s_timer_group_1_timer_0_isr,
-										NULL,
+										cb_arg,
 										ESP_INTR_FLAG_LOWMED,
 										NULL);
 			s_timer_group_1_timer_0_cb = cb;
@@ -132,7 +133,7 @@ esp_err_t ESP32_TIMER_SetInterruptCb(esp32_timer_group_type_t group,
 			err = timer_isr_register(group, 
 										timer_num,
 										s_timer_group_1_timer_1_isr,
-										NULL,
+										cb_arg,
 										ESP_INTR_FLAG_LOWMED,
 										NULL);
 			s_timer_group_1_timer_1_cb = cb;
